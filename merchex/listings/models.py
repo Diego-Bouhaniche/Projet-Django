@@ -25,6 +25,9 @@ class Band(models.Model):
 
 
 class Listing(models.Model):
+    def __str__(self):
+        return f'{self.title}'
+
     title = models.fields.CharField(max_length=100)
     description = models.fields.CharField(max_length=1000)
     sold = models.fields.BooleanField(default=False)

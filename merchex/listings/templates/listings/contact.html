@@ -1,9 +1,23 @@
+{% extends 'listings/base.html' %}
+
+{% block content %}
+
 <h1>Contactez-nous</h1>
 
 <p>Nous sommes là pour vous aider.</p>
 
-<form action="" method="post" novalidate>
+<form action="" method="post">
+    <!-- 
+        CSRF est l'abréviation de Cross Site Request Forgery. 
+        Il s'agit d'une méthode visant à inciter les utilisateurs à effectuer des opérations 
+        en créant (ou en « forgeant ») des requêtes. 
+        Le csrf_token empêche cela, en générant un jeton (token) aléatoire pour chaque requête. 
+        Si une requête POST ultérieure n'inclut pas ce jeton exact, Django sait que la requête 
+        est sans doute une contrefaçon et lève une erreur pour arrêter l'exécution.
+    -->
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Envoyer">
+    <input type="submit" value="Soumettre">
 </form>
+
+{% endblock %}

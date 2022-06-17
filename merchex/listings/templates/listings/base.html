@@ -3,16 +3,27 @@
 <html>
     <head>
         <title>Merchex</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'image/favicon.ico' %}"/>
         <link rel="stylesheet" href="{% static 'listings/styles.css' %}" />
     </head>
 
     <body>
 
         <nav>
-            <a href="{% url 'band-list' %}"> Groupes | </a>
-            <a href="{% url 'listing-list' %}">  Listings | </a>
+            <a href="{% url 'band-list' %}"> Groupes</a> |
+            <a href="{% url 'listing-list' %}">  Listings</a> |
+            <a href="{% url 'contact' %}">  Contact</a> |
+            <a href="{% url 'about' %}">  A propos</a> |
         </nav>
-       
+        
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
         {% block content %}{% endblock %}
 
     </body>
