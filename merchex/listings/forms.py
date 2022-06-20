@@ -14,7 +14,6 @@ class BandForm(forms.ModelForm):
       # fields = '__all__' # supprimez cette ligne
       exclude = ('active', 'official_homepage')  # ajoutez cette ligne
 
-
 class ListingForm(forms.ModelForm):
    class Meta:
       model = Listing

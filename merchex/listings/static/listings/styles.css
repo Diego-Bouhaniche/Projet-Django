@@ -1,1 +1,12 @@
 * { background: wheat }
+
+table {
+    border-spacing: 10px;
+}
+
+a {
+    text-decoration:none;
+}
+a:hover {
+    text-decoration: underline;
+}

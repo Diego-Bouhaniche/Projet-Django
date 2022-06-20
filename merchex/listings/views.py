@@ -14,14 +14,14 @@ from listings.models import Band, Listing
 def band_list(request):
     bands = Band.objects.all()
     return render(request, 
-        'listings/band_list.html',
+        'listings/groupes/band_list.html',
         {'bands': bands}
     )
     
 def band_detail(request, id):
   band = Band.objects.get(id=id)  # nous insérons cette ligne pour obtenir le Band avec cet id
   return render(request,
-          'listings/band_detail.html',
+          'listings/groupes/band_detail.html',
           {'band': band}) # nous mettons à jour cette ligne pour passer le groupe au gabarit
 
 def band_create(request):
@@ -40,14 +40,14 @@ def band_create(request):
         form = BandForm()
 
     return render(request,
-            'listings/band_create.html',
+            'listings/groupes/band_create.html',
             {'form': form})
 
 def band_update(request, id):
     band = Band.objects.get(id=id)
 
     if request.method == 'POST':
-        form = BandForm(instance=band)  # on pré-remplir le formulaire avec un groupe existant
+        form = BandForm(request.POST, instance=band)  # on pré-remplir le formulaire avec un groupe existant
         if form.is_valid():
             # mettre à jour le groupe existant dans la base de données
             form.save()
@@ -60,22 +60,36 @@ def band_update(request, id):
         form = BandForm(instance=band)
 
     return render(request,
-                'listings/band_update.html',
+                'listings/groupes/band_update.html',
                 {'form': form})
 
-        
+def band_delete(request, id):
+    band = Band.objects.get(id=id)  # nécessaire pour GET et pour POST
+
+    if request.method == 'POST':
+        # supprimer le groupe de la base de données
+        band.delete()
+        # rediriger vers la liste des groupes
+        return redirect('band-list')
+
+    # pas besoin de « else » ici. Si c'est une demande GET, continuez simplement
+    
+    return render(request,
+                    'listings/groupes/band_delete.html',
+                    {'band': band})
+
 ## LISTING ##
 def listing_list(request):
     listings = Listing.objects.all()
     return render(request, 
-        'listings/listing_list.html',
+        'listings/annonces/listing_list.html',
         {'listings': listings}
     )
 
 def listing_detail(request, id):
   listings = Listing.objects.get(id=id)
   return render(request,
-          'listings/listing_detail.html',
+          'listings/annonces/listing_detail.html',
           {'listing': listings})
 
 def listing_create(request):
@@ -95,14 +109,14 @@ def listing_create(request):
         form = ListingForm()
 
     return render(request,
-            'listings/listing_create.html',
+            'listings/annonces/listing_create.html',
             {'form': form})
 
 def listing_update(request, id):
     listing = Listing.objects.get(id=id)
 
     if request.method == 'POST':
-        form = ListingForm(instance=listing)  # on pré-remplir le formulaire avec un groupe existant
+        form = ListingForm(request.POST, instance=listing)  # on pré-remplir le formulaire avec un groupe existant
         
         if form.is_valid():
             # mettre à jour le groupe existant dans la base de données
@@ -111,18 +125,33 @@ def listing_update(request, id):
             return redirect('listing-detail', listing.id)
         else:
             messages.warning(request, 'POST : Form is invalid !')
-            print(form)
+
     else:
         form = ListingForm(instance=listing)
 
     return render(request,
-                'listings/listing_update.html',
+                'listings/annonces/listing_update.html',
                 {'form': form})
+
+def listing_delete(request, id):
+    listing = Listing.objects.get(id=id)  # nécessaire pour GET et pour POST
+
+    if request.method == 'POST':
+        # supprimer le groupe de la base de données
+        listing.delete()
+        # rediriger vers la liste des groupes
+        return redirect('listing-list')
+
+    # pas besoin de « else » ici. Si c'est une demande GET, continuez simplement
+
+    return render(request,
+                    'listings/annonces/listing_delete.html',
+                    {'listing': listing})
 
 ## AUTRE ##
 def about(request):
     return render(request,
-            'listings/about.html')
+            'listings/autres/about.html')
             
 def contact(request):   
     print('La méthode de requête est : ', request.method)
@@ -151,9 +180,9 @@ def contact(request):
         form = ContactUsForm()
 
     return render(request,
-            'listings/contact.html',
+            'listings/autres/contact.html',
             {'form': form})
 
 def email_sent(request):
   return render(request,
-          'listings/email_sent.html')
+          'listings/autres/email_sent.html')
