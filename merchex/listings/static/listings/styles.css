@@ -1,7 +1,37 @@
-* { background: wheat }
+* { 
+    font-family: 'Anek Malayalam', sans-serif; 
+    background: white
+}
+
+body{
+    margin: 0%;
+}
+
+p, h1, h2, a, input {
+    margin: 8px;
+}
+
+nav {
+    padding: 10px;
+    background-color: wheat;
+}
+nav a {
+    display: inline-block;
+    background-color: wheat;
+}
+img {
+    width: 80px;
+    height: 40px;
+    margin: auto;
+    padding: 10px;
+    background-color: wheat;    
+}
 
 table {
     border-spacing: 10px;
+}
+th {
+    padding-top: 15px;
 }
 
 a {
@@ -9,4 +39,5 @@ a {
 }
 a:hover {
     text-decoration: underline;
+    
 }

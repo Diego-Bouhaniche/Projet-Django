@@ -5,17 +5,22 @@
         <title>Merchex</title>
         <link rel="shortcut icon" type="image/png" href="{% static 'image/favicon.ico' %}"/>
         <link rel="stylesheet" href="{% static 'listings/styles.css' %}" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam&display=swap" rel="stylesheet">
     </head>
 
     <body>
-
         <nav>
+            <!-- <img src="{% static 'image/django-logo.png' %}" alt="logo">  -->          
             <a href="{% url 'band-list' %}"> Groupes</a> |
             <a href="{% url 'listing-list' %}">  Listings</a> |
             <a href="{% url 'contact' %}">  Contact</a> |
             <a href="{% url 'about' %}">  A propos</a> |
         </nav>
-        
+
+            
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}

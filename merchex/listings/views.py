@@ -33,6 +33,7 @@ def band_create(request):
             band = form.save()
             # redirige vers la page de détail du groupe que nous venons de créer
             # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
+            messages.success(request, 'Nouveau groupe créé !')
             return redirect('band-detail', band.id)
         else:
             messages.warning(request, 'POST : Form is invalid !')
@@ -52,6 +53,8 @@ def band_update(request, id):
             # mettre à jour le groupe existant dans la base de données
             form.save()
             # rediriger vers la page détaillée du groupe que nous venons de mettre à jour
+
+            messages.success(request, 'Le groupe a bien été mis à jour !')
             return redirect('band-detail', band.id)
         else:
             messages.warning(request, 'POST : Form is invalid !')
@@ -70,6 +73,7 @@ def band_delete(request, id):
         # supprimer le groupe de la base de données
         band.delete()
         # rediriger vers la liste des groupes
+        messages.success(request, 'Le groupe a bien été supprimé !')
         return redirect('band-list')
 
     # pas besoin de « else » ici. Si c'est une demande GET, continuez simplement
@@ -101,6 +105,7 @@ def listing_create(request):
             listing = form.save()
             # redirige vers la page de détail du groupe que nous venons de créer
             # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
+            messages.success(request, 'Nouveau listing créé !')
             return redirect('listing-detail', listing.id)
         else:
             messages.warning(request, 'POST : Form is invalid !')
@@ -122,6 +127,7 @@ def listing_update(request, id):
             # mettre à jour le groupe existant dans la base de données
             form.save()
             # rediriger vers la page détaillée du groupe que nous venons de mettre à jour
+            messages.success(request, 'Le listing a bien été mis à jour !')
             return redirect('listing-detail', listing.id)
         else:
             messages.warning(request, 'POST : Form is invalid !')
@@ -140,6 +146,7 @@ def listing_delete(request, id):
         # supprimer le groupe de la base de données
         listing.delete()
         # rediriger vers la liste des groupes
+        messages.success(request, 'Le listing a bien été supprimé !')
         return redirect('listing-list')
 
     # pas besoin de « else » ici. Si c'est une demande GET, continuez simplement
